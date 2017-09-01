@@ -1,0 +1,3 @@
+[submodule "huajiao_ios"]
+	path = huajiao_ios
+	url = https://git.corp.qihoo.net/huajiao_ios/huajiao_ios.git
