@@ -1,7 +1,8 @@
 import {
   AppRegistry
 } from 'react-native';
-import App from './js/App';
+// import App from './js/App';
+import MyHomeList from './js/MyHome/MyHome';
 
-
-AppRegistry.registerComponent('huajiao', () => App);
+AppRegistry.registerComponent('MyHome', () => MyHomeList);
+// AppRegistry.registerComponent('Main', () => App);
