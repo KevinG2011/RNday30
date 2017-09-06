@@ -2,7 +2,8 @@ import {
   AppRegistry
 } from 'react-native';
 // import App from './js/App';
-import MyHomeList from './js/MyHome/MyHome';
+import EditMyProfile from './js/living/MyHome/EditMyProfile';
 
-AppRegistry.registerComponent('MyHome', () => MyHomeList);
+AppRegistry.registerComponent('EditProfile', () => EditMyProfile);
+// AppRegistry.registerComponent('MyHome', () => MyHomeMain);
 // AppRegistry.registerComponent('Main', () => App);

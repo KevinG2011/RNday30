@@ -3,13 +3,13 @@ import {
 	View,
 	FlatList,
 	ActivityIndicator,
-	Text
+	StatusBar
 } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import axios from 'axios';
 // import MyHomeListItem from './MyHomeListItem';
 
-class MyHomeList extends PureComponent {
+class MyHomeMain extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,8 +18,10 @@ class MyHomeList extends PureComponent {
 			page: 1,
 			seed: 1,
 			error: null,
-			refreshing: false
+			refreshing: false,
 		};
+		this.handleRefresh = this.handleRefresh.bind(this);
+		this.handleLoadMore = this.handleLoadMore.bind(this);
 	}
 
 	componentDidMount() {
@@ -32,9 +34,8 @@ class MyHomeList extends PureComponent {
 		const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
 		axios.get(url)
 			.then(res => {
-				console.log(res);
 				this.setState({
-					data: this.page === 1 ? res.results : [...this.state.data, ...res.results],
+					data: page === 1 ? res.data.results : [...this.state.data, ...res.data.results],
 					error: res.error || null,
 					loading: false,
 					refreshing: false
@@ -50,10 +51,11 @@ class MyHomeList extends PureComponent {
 	}
 
 	handleRefresh() {
+		const { seed } = this.state;
 		this.setState({
 			page: 1,
 			refreshing: true,
-			seed: this.state.seed + 1
+			seed: seed + 1
 		},
 		() => {
 			this.loadRemoteData();
@@ -61,8 +63,10 @@ class MyHomeList extends PureComponent {
 	}
 
 	handleLoadMore() {
+		const { page } = this.state;
+		console.log(page);
 		this.setState({
-			page: this.state.page + 1,
+			page: page + 1,
 		},
 		() => {
 			this.loadRemoteData();
@@ -82,9 +86,7 @@ class MyHomeList extends PureComponent {
 		);
 	};
 
-	renderHeader = () => {
-		return <SearchBar placeholder="Type Here..." lightTheme round />;
-	};
+	renderHeader = () => (<SearchBar placeholder="Type Here..." lightTheme round />);
 
 	renderFooter = () => {
 		if (!this.state.loading) return null;
@@ -96,35 +98,32 @@ class MyHomeList extends PureComponent {
 					borderTopColor: '#CED0CE'
 				}}
 			>
-				<ActivityIndicator animating size='large' />
+				<ActivityIndicator animating size='small' />
 			</View>
 		);
 	};
 
-	render () {
-		console.log('render');
+	render() {
 		return (
-			<List>
+			<List style={styles.listContainerStyle}>
+        <StatusBar
+          translucent={true}
+          barStyle="dark-content"
+        />
 				<FlatList
-					style={styles.listStyle}
 					data={this.state.data}
-					renderItem={({ item }) => {
-						return (
-							<ListItem
-								roundAvatar
-								title={item.name.first}
-								subtitle={item.email}
-								avatar={{ uri: item.picture.thumbnail }}
-								containerStyle={{ borderBottomWidth: 0 }}
-							/>
-						);
-					}}
+					renderItem={({ item }) => (
+						<ListItem
+							roundAvatar
+							title={`${item.name.first} ${item.name.last}`}
+							subtitle={item.email}
+							avatar={{ uri: item.picture.thumbnail }}
+						/>
+					)}
 					keyExtractor={(item) => item.email}
-					ItemSeparatorComponent={this.renderSeparator}
+					refreshing={this.state.refreshing}
 					ListHeaderComponent={this.renderHeader}
 					ListFooterComponent={this.renderFooter}
-					onRefresh={this.handleRefresh}
-					refreshing={this.state.refreshing}
 					onEndReached={this.handleLoadMore}
 					onEndReachedThreshold={50}
 				/>
@@ -133,19 +132,17 @@ class MyHomeList extends PureComponent {
 	}
 }
 
-
 const styles = {
 	listContainerStyle: {
 		flex: 1,
-		backgroundColor: 'black',
-    justifyContent: 'center',
+		borderTopWidth: 0,
+		borderBottomWidth: 0,
+		paddingTop: 64,
 	},
-	textStyle: {
-		textAlign: 'center',
-		color: 'white',
-		fontSize: 22,
-    fontWeight: 'bold',
+	listItemStyle: {
+		borderTopWidth: 0,
+		borderBottomWidth: 0
 	}
 };
 
-export default MyHomeList;
+export default MyHomeMain;
