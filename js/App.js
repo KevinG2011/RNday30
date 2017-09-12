@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import ClockView from './day30/day1';
+import WatchView from './day30/day01/index';
 
 class App extends Component {
 	render() {
 		return (
-      <View style={styles.containerStyle}>
-        <ClockView />
-      </View>
+      <WatchView />
 		);
 	}
 }

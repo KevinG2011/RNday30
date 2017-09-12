@@ -11,6 +11,10 @@ const Util = {
 		width: Dimensions.get('window').width,
 		height: Dimensions.get('window').height,
 	},
+	pad2: (d) => {
+		return (d < 10) ? `0${d}` : `${d}`;
+	}
 };
+
 
 export { Util };

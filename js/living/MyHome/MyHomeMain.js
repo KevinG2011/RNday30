@@ -74,7 +74,7 @@ class MyHomeMain extends PureComponent {
 	}
 
 	renderSeparator = () => {
-		return (
+	 return (
 			<View
 				style={{
 				height: 1,
@@ -107,7 +107,7 @@ class MyHomeMain extends PureComponent {
 		return (
 			<List style={styles.listContainerStyle}>
         <StatusBar
-          translucent={true}
+          translucent
           barStyle="dark-content"
         />
 				<FlatList

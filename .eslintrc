@@ -1,7 +1,17 @@
 {
+  "env": {
+    "es6": true,
+    "jasmine": true,
+  },
 	"extends":"rallycoding",
   rules: {
-  	'no-mixed-spaces-and-tabs': 0,
+  	"no-mixed-spaces-and-tabs": 0,
   	"react/no-multi-comp": 0,
+  	"no-undef": 1,
+  	"no-underscore-dangle": 0,
+  	"arrow-body-style": 0,
+  	"no-mixed-operators": 0,
+  	"space-infix-ops": 0,
+  	"max-len": 0,
 	},
 }
