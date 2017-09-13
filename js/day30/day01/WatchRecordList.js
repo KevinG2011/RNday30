@@ -52,8 +52,8 @@ class WatchRecordList extends PureComponent {
 		);
 	}
 
-	_keyExtractor = (data) => {
-		return data.item.id;
+	_keyExtractor = (item) => {
+		return item.id;
 	}
 
 	_itemSeparator = () => {
