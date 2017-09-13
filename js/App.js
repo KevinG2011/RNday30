@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import WatchView from './day30/day01/index';
+// import WatchView from './day30/day01/index';
+import WeatherView from './day30/day02/index';
+
+// <WatchView />
 
 class App extends Component {
 	render() {
 		return (
-      <WatchView />
+      <WeatherView />
 		);
 	}
 }
-
-const styles = {
-  containerStyle: {
-    flex: 1
-  }
-};
 
 export default App;
