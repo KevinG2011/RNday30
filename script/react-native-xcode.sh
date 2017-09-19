@@ -81,6 +81,9 @@ if [[ "$CONFIGURATION" = "Debug" && ! "$PLATFORM_NAME" == *simulator ]]; then
   $PLISTBUDDY -c "Add NSAppTransportSecurity:NSExceptionDomains:localhost:NSTemporaryExceptionAllowsInsecureHTTPLoads bool true" "$PLIST"
   $PLISTBUDDY -c "Add NSAppTransportSecurity:NSExceptionDomains:$IP.xip.io:NSTemporaryExceptionAllowsInsecureHTTPLoads bool true" "$PLIST"
   echo "$IP.xip.io" > "$DEST/ip.txt"
+
+  DEV_PLIST="$DEST/dev_info.plist"
+  $PLISTBUDDY -c "Add dev_mode bool true" "$DEV_PLIST"
 fi
 
 BUNDLE_FILE="$DEST/main.jsbundle"

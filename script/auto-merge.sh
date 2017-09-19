@@ -10,7 +10,7 @@ set -x
 git checkout 20170904_v601
 git pull
 git checkout 20170901_v406_RCT
-git pull 
+git pull
 git merge 20170904_v601
 
 cd $current_path
