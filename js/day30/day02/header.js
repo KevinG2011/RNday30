@@ -22,9 +22,8 @@ class Header extends Component {
 		      <Text style={styles.degree}>{degree}</Text>
 		      <Text style={styles.circle}>°</Text>
 		    </View>
-				<View style={styles.dayContainer}>
-					<View style={styles.dayHeader}>
-						<View style={styles.headerLeft}>
+				<View style={styles.bottomContainer}>
+					<View style={styles.headerLeft}>
 		      		<Text style={[styles.dayFont, styles.dayWeek]}>{week}</Text>
 		      		<Text style={[styles.dayFont, styles.dayDay]}>{day}</Text>
 						</View>
@@ -32,7 +31,6 @@ class Header extends Component {
 							<Text style={[styles.dayFont, styles.dayHigh]}>{high}</Text>
 							<Text style={[styles.dayFont, styles.dayLow]}>{low}</Text>
 						</View>
-					</View>
 				</View>
 			</View>
 		);
@@ -76,17 +74,14 @@ const styles = {
     top: 130,
     right: Util.size.width/2-55,
 	},
-	dayContainer: {
+	bottomContainer: {
 		flex: 1,
-		backgroundColor: '#333',
-	},
-	dayHeader: {
 		height: 20,
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
 		paddingLeft: 20,
 		paddingRight: 20,
-		backgroundColor: '#222',
+		backgroundColor: 'transparent',
 	},
 	dayFont: {
     fontSize: 15,
@@ -110,13 +105,5 @@ const styles = {
 	},
 	dayHigh: {
 		marginRight: 12,
-	},
-	hourListContainer: {
-		flex: 1,
-	},
-	dayItem: {
-		flex: 1,
-		width: 40,
-		backgroundColor: 'transparent'
 	},
 };

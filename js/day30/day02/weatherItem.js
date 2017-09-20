@@ -61,6 +61,7 @@ const styles = {
 	},
 	blank: {
 		flex: 1,
+		height: Util.size.height / 2,
 	}
 };
 

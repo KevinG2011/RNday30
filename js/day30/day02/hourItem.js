@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import {
 	View,
@@ -20,7 +22,7 @@ const HourItem = (props) => {
 		<View key={key} style={[styles.container, style]}>
       <Text style={timeStyles}>{time}</Text>
       <Icon
-      	style={[styles.icon,iconColor]}
+      	style={[styles.icon, iconColor]}
       	name={icon}
       	size={25}
       />

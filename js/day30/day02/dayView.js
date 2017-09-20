@@ -1,23 +1,21 @@
+'use strict';
 
-import Reactfrom 'react';
+import React from 'react';
 import {
 	View
 } from 'react-native';
+import { Util } from '../../common/';
 import DayItem from '../day02/dayItem';
 
 const DaysView = (props) => {
-
-	_renderItem = (days) => (
-		days.map((item, index) => {
-			return (
-				<DayItem style={styles.dayItem} data={item} index={index} />
-			);
-		})
-	);
 	const { days } = props;
 	return (
 		<View style={styles.container}>
-				{this._renderItem(days)}
+		{
+			days.map((item, index) => (
+					<DayItem style={styles.dayItem} data={item} index={index} />
+			))
+		}
 		</View>
 	);
 };
@@ -27,7 +25,8 @@ export default DaysView;
 const styles = {
 	container: {
 		flex: 1,
+		borderBottomWidth: Util.pixel,
+		borderBottomColor: 'rgba(255,255,255,0.7)',
 	},
 };
-
 
