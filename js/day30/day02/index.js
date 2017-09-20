@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import {
+	StatusBar,
 	View,
 	FlatList
 } from 'react-native';
@@ -35,7 +36,7 @@ class WeatherView extends Component {
 			backgroundColor: bgColor,
 		};
 		return (
-			<WeatherItem data={item} />
+			<WeatherItem data={item} parentState={this.state} />
 		);
 	}
 
@@ -46,6 +47,10 @@ class WeatherView extends Component {
 	render() {
 		return (
 			<View style={styles.containerStyle}>
+		   	<StatusBar
+		     	backgroundColor="blue"
+		     	barStyle="light-content"
+		   	/>
 				<FlatList
 					data={this.state.data}
 					extraData={this.state}
@@ -55,7 +60,7 @@ class WeatherView extends Component {
 					horizontal
 					pagingEnabled
           directionalLockEnabled
-          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
 				/>
 			</View>
 		);

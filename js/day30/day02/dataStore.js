@@ -6,7 +6,7 @@ const DataStore = () => {
 			key: 0,
 			city: '\u798f\u5dde',
 			night: true,
-			bg: './img/w2.png',
+			bg: require('./img/w2.png'),
 			abs: '\u5927\u90e8\u6674\u6717',
 			degree: 15,
 			today: {
@@ -288,7 +288,7 @@ const DataStore = () => {
 			key: 1,
 			city: '\u5361\u5c14\u52a0\u91cc',
 			night: false,
-			bg: './img/w3.png',
+			bg: require('./img/w3.png'),
 			abs: '\u5927\u90e8\u6674\u6717',
 			degree: 15,
 			today: {
