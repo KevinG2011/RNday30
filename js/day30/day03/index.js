@@ -7,16 +7,13 @@ import {
 	FlatList
 } from 'react-native';
 import { Util } from '../../common/';
-import DataStore from './dataStore';
-import WeatherItem from './weatherItem';
 
 const ITEM_WIDTH = Util.size.width;
 
-class WeatherView extends Component {
+class TwitterScreen extends Component {
 	constructor(props) {
 	  super(props);
-	  const data = DataStore();
-	  this.state = { data };
+	  this.state = { };
 	}
 
 	_getItemLayout = (data, index) => {
@@ -29,24 +26,18 @@ class WeatherView extends Component {
 	}
 
 	_renderItem = ({ item, index }) => {
-		const bgColor = index === 0 ? 'green' : 'purple';
-		const itemStyle = {
-			width: Util.size.width,
-			flex: 1,
-			backgroundColor: bgColor,
-		};
 		return (
-			<WeatherItem data={item} parentState={this.state} />
+			<View />
 		);
 	}
 
 	_keyExtractor = (item) => {
-		return item.city;
+		return item.key;
 	}
 
 	render() {
 		return (
-			<View style={styles.containerStyle}>
+			<View style={styles.container}>
 		   	<StatusBar
 		     	barStyle="light-content"
 		   	/>
@@ -67,9 +58,9 @@ class WeatherView extends Component {
 }
 
 const styles = {
-  containerStyle: {
+  container: {
     flex: 1
   },
 };
 
-export default WeatherView;
+export default TwitterScreen;
