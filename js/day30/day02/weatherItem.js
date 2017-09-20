@@ -10,6 +10,7 @@ import { Util } from '../../common/';
 import Header from './header';
 import HoursView from './hourView';
 import DaysView from './dayView';
+import InfoView from './infoView';
 
 class WeatherItem extends Component {
 	constructor(props) {
@@ -31,7 +32,7 @@ class WeatherItem extends Component {
 						<Header style={styles.header} data={data} />
 						<HoursView style={styles.hours} hours={hours} />
 						<DaysView style={styles.days} days={days} />
-						<View style={styles.blank} />
+						<InfoView style={styles.info} data={data} />
 					</ScrollView>
 				</View>
 			</Image>
@@ -59,9 +60,9 @@ const styles = {
 	days: {
 		flex: 1,
 	},
-	blank: {
+	info: {
 		flex: 1,
 		height: Util.size.height / 2,
-	}
+	},
 };
 

@@ -15,12 +15,12 @@ const HoursView = (props) => {
 			<ScrollView
 	      directionalLockEnabled
 	      showsVerticalScrollIndicator={false}
-	      showsHorizontalScrollIndicator
+	      showsHorizontalScrollIndicator={false}
 	      horizontal
 	   		>
 				{
 					hours.map((item, index) => (
-						<HourItem style={styles.dayItem} data={item} index={index} />
+						<HourItem key={item.key} style={styles.dayItem} data={item} index={index} />
 					))
 				}
 			</ScrollView>
@@ -33,6 +33,8 @@ export default HoursView;
 const styles = {
 	container: {
 		flex: 1,
+		paddingTop: 10,
+		paddingBottom: 10,
 		borderBottomWidth: Util.pixel,
 		borderTopWidth: Util.pixel,
 		borderBottomColor: 'rgba(255,255,255,0.7)',

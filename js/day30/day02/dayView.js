@@ -25,6 +25,8 @@ export default DaysView;
 const styles = {
 	container: {
 		flex: 1,
+		paddingTop: 10,
+		paddingBottom: 10,
 		borderBottomWidth: Util.pixel,
 		borderBottomColor: 'rgba(255,255,255,0.7)',
 	},
