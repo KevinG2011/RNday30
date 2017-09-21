@@ -6,7 +6,7 @@ import {
 	Text,
 
 } from 'react-native';
-import { Util } from '../../common/';
+import { Util } from '../../component/common/';
 
 
 class Header extends Component {

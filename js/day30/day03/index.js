@@ -1,19 +1,15 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-	StatusBar,
-	View,
-	FlatList
-} from 'react-native';
-import { Util } from '../../common/';
+import { StatusBar, View, FlatList } from 'react-native';
+import { Util } from '../../component/common/';
 
 const ITEM_WIDTH = Util.size.width;
 
 class TwitterScreen extends Component {
 	constructor(props) {
-	  super(props);
-	  this.state = { };
+		super(props);
+		this.state = {};
 	}
 
 	_getItemLayout = (data, index) => {
@@ -23,24 +19,20 @@ class TwitterScreen extends Component {
 			index
 		};
 		return layout;
-	}
+	};
 
 	_renderItem = ({ item, index }) => {
-		return (
-			<View />
-		);
-	}
+		return <View />;
+	};
 
-	_keyExtractor = (item) => {
+	_keyExtractor = item => {
 		return item.key;
-	}
+	};
 
 	render() {
 		return (
 			<View style={styles.container}>
-		   	<StatusBar
-		     	barStyle="light-content"
-		   	/>
+				<StatusBar barStyle="light-content" />
 				<FlatList
 					data={this.state.data}
 					extraData={this.state}
@@ -49,8 +41,8 @@ class TwitterScreen extends Component {
 					keyExtractor={this._keyExtractor}
 					horizontal
 					pagingEnabled
-          directionalLockEnabled
-          showsHorizontalScrollIndicator={false}
+					directionalLockEnabled
+					showsHorizontalScrollIndicator={false}
 				/>
 			</View>
 		);
@@ -58,9 +50,9 @@ class TwitterScreen extends Component {
 }
 
 const styles = {
-  container: {
-    flex: 1
-  },
+	container: {
+		flex: 1
+	}
 };
 
 export default TwitterScreen;

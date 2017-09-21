@@ -6,8 +6,8 @@ import {
 	View,
 	FlatList
 } from 'react-native';
-import { Util } from '../../common/';
 import DataStore from './dataStore';
+import { Util } from '../../component/common/';
 import WeatherItem from './weatherItem';
 
 const ITEM_WIDTH = Util.size.width;

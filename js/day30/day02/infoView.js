@@ -5,7 +5,7 @@ import {
 	View,
 	Text
 } from 'react-native';
-import { Util } from '../../common/';
+import { Util } from '../../component/common/';
 
 const InfoView = (props) => {
 	const { style, data } = props;

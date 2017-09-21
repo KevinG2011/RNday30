@@ -5,7 +5,7 @@ import {
 	View,
 	ScrollView
 } from 'react-native';
-import { Util } from '../../common/';
+import { Util } from '../../component/common/';
 import HourItem from '../day02/hourItem';
 
 const HoursView = (props) => {

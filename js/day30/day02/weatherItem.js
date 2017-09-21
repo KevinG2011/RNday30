@@ -6,7 +6,7 @@ import {
 	ScrollView,
 	Image,
 } from 'react-native';
-import { Util } from '../../common/';
+import { Util } from '../../component/common/';
 import Header from './header';
 import HoursView from './hourView';
 import DaysView from './dayView';

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {
 	View,
 } from 'react-native';
-import { Util } from '../../common';
+import { Util } from '../../component/common/';
 
 import WatchMeter from './WatchMeter';
 import WatchControl from './WatchControl';

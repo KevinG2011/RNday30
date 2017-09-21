@@ -4,13 +4,9 @@ import React, { Component } from 'react';
 import {
 	View
 } from 'react-native';
-import { Button, Util } from '../../common/';
+import { Button, Util } from '../../component/common/';
 
 class WatchControl extends Component {
-	props: {
-		onEventChanged: (control:WatchControl, event:string) => void;
-	};
-
 	constructor(props) {
 	  super(props);
 	  this.state = {

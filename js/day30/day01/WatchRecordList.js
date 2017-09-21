@@ -6,7 +6,7 @@ import {
 	Text,
 	FlatList
 } from 'react-native';
-import { Util } from '../../common/';
+import { Util } from '../../component/common/';
 
 class WatchRecordItem extends PureComponent {
 	render() {

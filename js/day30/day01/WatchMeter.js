@@ -5,7 +5,7 @@ import {
 	View,
 	Text,
 } from 'react-native';
-import { Util } from '../../common/';
+import { Util } from '../../component/common/';
 
 class WatchMeter extends Component {
 	props: {

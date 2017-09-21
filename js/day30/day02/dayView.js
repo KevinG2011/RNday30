@@ -4,7 +4,7 @@ import React from 'react';
 import {
 	View
 } from 'react-native';
-import { Util } from '../../common/';
+import { Util } from '../../component/common/';
 import DayItem from '../day02/dayItem';
 
 const DaysView = (props) => {
