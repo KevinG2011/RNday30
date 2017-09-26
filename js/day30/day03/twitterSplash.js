@@ -1,0 +1,99 @@
+'use strict';
+
+import React, { Component } from 'react';
+import {
+	Animated,
+	Easing
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { Util } from '../../component/common/';
+
+const AnimatedIcon = Animated.createAnimatedComponent(Icon);
+
+class TwitterSplash extends Component {
+  static propTypes = {
+    onFinished: React.PropTypes.func.isRequired,
+  };
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			timer: null,
+			opacityAnim: new Animated.Value(1),
+			transformAnim: new Animated.Value(1),
+		};
+	}
+
+	componentDidMount() {
+		const { opacityAnim, transformAnim } = this.state;
+	  const opaToAnim = {
+			toValue: 0,
+			duration: 800,
+			delay: 2200,
+			easing: Easing.elastic(1),
+	  };
+	  Animated.timing(opacityAnim, opaToAnim).start();
+		const tranToAnim = {
+			toValue: 15,
+			duration: 1200,
+			delay: 2000,
+			easing: Easing.elastic(2),
+		};
+	  Animated.timing(transformAnim, tranToAnim).start();
+
+	  this.state.timer = setTimeout(() => {
+	  	const { onFinished = null } = this.props;
+	  	if (onFinished !== null) {
+	  		onFinished();
+	  	}
+	  }, 3300);
+	}
+
+	componentWillUnmount() {
+		const { timer = null } = this.state;
+		if (timer !== null) {
+	  	clearTimeout(timer);
+	  	this.state.timer = null;
+		}
+	}
+
+	render() {
+		const { opacityAnim, transformAnim } = this.state;
+		//TODO
+		const opacityStyle = { opacity: opacityAnim };
+		const transStyle = {
+			transform: [{
+				scale: transformAnim
+			}]
+		};
+		return (
+			<Animated.View style={[styles.container, opacityStyle]}>
+				<AnimatedIcon
+					size={60}
+					style={[styles.splash, transStyle]}
+					name="logo-twitter"
+				/>
+			</Animated.View>
+		);
+	}
+}
+
+export default TwitterSplash;
+
+const styles = {
+	container: {
+		flex: 1,
+		width: Util.size.width,
+		height: Util.size.height,
+    position: 'absolute',
+		backgroundColor: '#1b95e0',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	splash: {
+    position: 'relative',
+    color: '#fff',
+    textAlign: 'center',
+	}
+};
+

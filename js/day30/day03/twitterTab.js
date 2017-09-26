@@ -16,8 +16,10 @@ export default class TwitterTab extends Component {
 	}
 
 	_onTabSelected = (selectedIndex) => {
-		console.log(`selectedIndex : ${selectedIndex}`);
-		
+		if (selectedIndex !== this.state.selectedIndex) {
+			console.log(`selectedIndex : ${selectedIndex}`);
+			this.setState({ selectedIndex });
+		}
 	};
 
 	render() {
