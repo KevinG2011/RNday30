@@ -18,7 +18,7 @@ class TwitterSplash extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			timer: null,
+			timer: 0,
 			opacityAnim: new Animated.Value(1),
 			transformAnim: new Animated.Value(1),
 		};
@@ -50,21 +50,22 @@ class TwitterSplash extends Component {
 	}
 
 	componentWillUnmount() {
-		const { timer = null } = this.state;
-		if (timer !== null) {
+		const { timer = 0 } = this.state;
+		if (timer > 0) {
 	  	clearTimeout(timer);
-	  	this.state.timer = null;
+	  	this.state.timer = 0;
 		}
 	}
 
 	render() {
 		const { opacityAnim, transformAnim } = this.state;
-		//TODO
 		const opacityStyle = { opacity: opacityAnim };
 		const transStyle = {
-			transform: [{
-				scale: transformAnim
-			}]
+			transform: [
+				{
+					scale: transformAnim
+				},
+			]
 		};
 		return (
 			<Animated.View style={[styles.container, opacityStyle]}>
