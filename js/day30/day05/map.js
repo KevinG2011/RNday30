@@ -3,38 +3,70 @@
 import React, { Component } from 'react';
 import {
 	View,
-	MapView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MapView from 'react-native-maps';
+import { Util } from '../../component/common/';
 
-class Name extends Component {
+class MapViewWrapper extends Component {
 	static propTypes = {
-	  mapType: React.PropTypes.oneOf(['standard', 'satellite','hybrid']),
-	  showsUserLocation: React.PropTypes.bool.isRequired,
-	  followUserLocation: React.PropTypes.bool.isRequired,
+	  mapType: MapView.propTypes.mapType,
+	  showsUserLocation: MapView.propTypes.showsUserLocation,
+	  followsUserLocation: MapView.propTypes.followsUserLocation,
+	}
+
+	constructor(props) {
+	  super(props);
+	  this.state = {
+	  	isFirstLoad: true,
+	  	mapRegion: undefined,
+	  	annotations: [],
+	  };
+	}
+
+	_onRegionChangeComplete = ({ latitude, longitude }) => {
+		const { isFirstLoad } = this.state;
+		if (isFirstLoad) {
+			this.setState({
+				isFirstLoad: false,
+				annotations: [{ latitude, longitude, title: 'Your Are Here.' }],
+			});
+		}
 	}
 
 	render() {
-		const { data } = this.props;
+		const { showsUserLocation, followsUserLocation } = this.props;
+		const { mapRegion } = this.state;
+		console.log('showsUserLocation :' + showsUserLocation);
+		console.log('followsUserLocation :' + followsUserLocation);
 		return (
 			<View style={styles.container}>
+			  <MapView
+			  	style={styles.map}
+			    region={mapRegion}
+			    onRegionChangeComplete={this._onRegionChangeComplete}
+			    showsUserLocation={showsUserLocation}
+			    followsUserLocation={followsUserLocation}
+			  />
 			</View>
 		);
 	}
 }
 
-Name.defaultProps = {
+MapViewWrapper.defaultProps = {
 	mapType: 'standard',
-	showsUserLocation: false,
-	followUserLocation: false,
-}
+	showsUserLocation: true,
+	followsUserLocation: false,
+};
 
-export default Name;
+export default MapViewWrapper;
 
 const styles = {
 	container: {
 		flex: 1,
 	},
+	map: {
+		flex: 1,
+	},
 };
-
 
