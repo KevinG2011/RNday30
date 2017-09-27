@@ -7,10 +7,13 @@ if [ '$filename' != 'huajiao_ios' ]; then
 fi
 
 set -x
-git checkout 20170904_v601
+from=20170904_v601
+to=20170901_v406_RCT
+
+git checkout $from
 git pull
-git checkout 20170901_v406_RCT
+git checkout $to
 git pull
-git merge 20170904_v601
+git merge $from
 
 cd $current_path
