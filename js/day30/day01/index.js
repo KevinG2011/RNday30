@@ -14,7 +14,7 @@ class WatchView extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {
-	  	timerID: 0,
+	  	timer: 0,
 	  	records: [], //{ id: '1', recordTime: '19:00:44' }
 			initialTime: 0,
 			currentTime: 0,
@@ -44,7 +44,7 @@ class WatchView extends Component {
 							secsecond,
 							secmilSecond;
 
-		const timerID = setInterval(() => {
+		const timer = setInterval(() => {
 			this.setState({
 				currentTime: (new Date()).getTime(),
 			}, () => {
@@ -65,19 +65,19 @@ class WatchView extends Component {
 		}, 10);
 
 		this.setState({
-			timerID
+			timer
 		});
 	}
 
 	onStopWatch = () => {
-		const { timeAccumulation, currentTime, initialTime, timerID } = this.state;
-		if (timerID !== 0) {
-			clearInterval(timerID);
+		const { timeAccumulation, currentTime, initialTime, timer } = this.state;
+		if (timer !== 0) {
+			clearInterval(timer);
 		}
 		const countingTime = timeAccumulation + currentTime - initialTime;
 		this.setState({
 			timeAccumulation: countingTime,
-			timerID: 0
+			timer: 0
 		});
 	}
 
@@ -99,7 +99,7 @@ class WatchView extends Component {
 
 	onResetWatch = () => {
 		this.setState({
-	  	timerID: 0,
+	  	timer: 0,
 	  	records: [], //{ id: '1', recordTime: '19:00:44' }
 			initialTime: 0,
 			currentTime: 0,

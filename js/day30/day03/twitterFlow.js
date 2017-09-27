@@ -51,16 +51,7 @@ class FlowScreen extends PureComponent {
 				}
 	  	],
 	  	refreshing: false,
-	  	timer: 0,
 	  };
-	}
-
-	componentWillUnmount() {
-		const { timer = 0 } = this.state;
-		if (timer > 0) {
-			clearTimeout(timer);
-			this.state.timer = 0;
-		}
 	}
 
 	_getItemLayout = (data, index) => {

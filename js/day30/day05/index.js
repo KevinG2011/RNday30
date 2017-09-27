@@ -19,14 +19,14 @@ class MapScreen extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {
-	  	followsCurrentLocation: false
+	  	followsCurrentLocation: false,
 	  };
 	}
 
 	_onFindMyLocation = () => {
 		console.log('_onFindMyLocation');
 		this.setState({
-			followsCurrentLocation: true
+			followsCurrentLocation: true,
 		});
 	}
 
