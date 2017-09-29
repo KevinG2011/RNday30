@@ -22,7 +22,7 @@ class MapScreen extends Component {
 	  	followsCurrentLocation: false,
 	  };
 	}
-
+	
 	_onFindMyLocation = () => {
 		this.setState({
 			followsCurrentLocation: true,
