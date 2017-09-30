@@ -17,10 +17,25 @@ class PanGestureScreen extends Component {
 		title: 'Basic pan gesture',
 	};
 
+	_previousLeft = 0;
+	_previousTop = 0;
+	_ballProps = {};
+	_ballRefView = (null : ?{ setNativeProps(props: Object): void});
+	_ballRadius = 120;
+	_maxLeft = Util.size.width - this._ballRadius + 20;
+	_maxTop = Util.size.height - 64 - 40 - this._ballRadius;
+
 	constructor(props) {
 	  super(props);
 	  this.state = {
+	  	iconColor: 'rgba(255, 255, 255, 1)',
+	  };
 
+	  this._ballProps = {
+	  	style: {
+		  	left: this._previousLeft,
+		  	top: this._previousTop,
+	  	}
 	  };
 	}
 
@@ -30,39 +45,70 @@ class PanGestureScreen extends Component {
 	  	onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
 	  	onMoveShouldSetPanResponder: (evt, gestureState) => true,
 	  	onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-			onPanResponderGrant: (evt, gestureState) => {
-        // 开始手势操作。给用户一些视觉反馈，让他们知道发生了什么事情！
-        // gestureState.{x,y} 现在会被设置为0
-      },
-      onPanResponderMove: (evt, gestureState) => {
-        // 最近一次的移动距离为gestureState.move{X,Y}
-        // 从成为响应者开始时的累计手势移动距离为gestureState.d{x,y}
-      },
 			onPanResponderTerminationRequest: (evt, gestureState) => true,
-      onPanResponderRelease: (evt, gestureState) => {
-        // 用户放开了所有的触摸点，且此时视图已经成为了响应者。
-        // 一般来说这意味着一个手势操作已经成功完成。
-      },
-			onPanResponderTerminate: (evt, gestureState) => {
-        // 另一个组件已经成为了新的响应者，所以当前手势将被取消。
-      },
-      onShouldBlockNativeResponder: (evt, gestureState) => {
-        // 返回一个布尔值，决定当前组件是否应该阻止原生组件成为JS响应者
-        // 默认返回true。目前暂时只支持android。
-        return true;
-      },
+			onPanResponderGrant: this._onPanGestureGrant,
+      onPanResponderMove: this._onPanGestureMove,
+      onPanResponderRelease: this._onPanGestureEnd,
+			onPanResponderTerminate: this._onPanGestureEnd,
 	  });
 	}
 
+	componentDidMount() {
+		this._updateBallPosition();
+	}
+
+	_updateBallPosition = () => (this._ballRefView && this._ballRefView.setNativeProps(this._ballProps));
+
+	_onPanGestureGrant = (evt, gestureState) => {
+		console.log('_onPanGestureGrant');
+		const { left, top } = this._ballProps.style;
+		this._previousLeft = left;
+		this._previousTop = top;
+    this.setState({
+			iconColor: 'rgba(255, 255, 255, 0.7)',
+    });
+	}
+
+	_onPanGestureMove = (evt, gestureState) => {
+		const { dx, dy } = gestureState;
+		let left = this._previousLeft + dx;
+		left = Math.max(left, 0);
+		left = Math.min(left, this._maxLeft);
+
+		let top = this._previousTop + dy;
+		top = Math.max(top, 0);
+		top = Math.min(top, this._maxTop);
+
+		this._ballProps.style = { left, top };
+		this._updateBallPosition();
+	}
+
+	_onPanGestureEnd = (evt, gestureState) => {
+		console.log('_onPanGestureEnd');
+		this.setState({
+			iconColor: 'rgba(255, 255, 255, 1)',
+		});
+		this._updateBallPosition();
+	}
+
 	render() {
+		const { iconColor } = this.state;
 		return (
 			<View style={styles.container}>
 				<Image
 				  style={styles.bg}
 				  source={require('./img/agrass.png')}
 				/>
-				<View style={styles.ball} ref={ballView => { this.ballView = ballView }} >
-        	<Icon ref="baseball" name="ios-baseball" color={this.state.color} size={120} />
+				<View
+					style={styles.ballView}
+					ref={ballView => (this._ballRefView = ballView)}
+					{...this._panResponder.panHandlers}
+				>
+        	<Icon
+        		name="ios-baseball"
+        		color={iconColor}
+        		size={this._ballRadius}
+        	/>
 				</View>
 			</View>
 		);
@@ -81,10 +127,14 @@ const styles = {
 	},
 	bg: {
 		position: 'absolute',
-
+		resizeMode: 'stretch',
+		width: Util.size.width
 	},
-	ball: {
-
+	ballView: {
+		backgroundColor: 'transparent',
+		left: 0,
+		right: 0,
+		position: 'absolute',
 	}
 };
 
