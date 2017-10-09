@@ -1,3 +1,5 @@
+'use strict';
+
 import React, { Component } from 'react';
 import {
 	Dimensions,
@@ -9,6 +11,7 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 // import ViewPager from 'react-native-viewpager';
+import { FeedService } from '../../component/service/';
 
 
 const deviceWidth = Dimensions.get('window').width;
@@ -38,10 +41,20 @@ class VideoScreen extends Component {
 	  super(props);
 	  this.state = {
 			titles: ['推荐', '新鲜'],
-			idx: 0
+			idx: 0,
+			data: [],
 	  };
 	  this.handleIndexChanged = this.handleIndexChanged.bind(this);
 	  this.renderContent = this.renderContent.bind(this);
+	}
+
+	componentWillMount() {
+		const params = {
+			refresh: 1,
+			num: 20,
+			shuffle: 0,
+			name: 'video',
+		};
 	}
 
 	handleIndexChanged() {

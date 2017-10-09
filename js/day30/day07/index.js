@@ -17,19 +17,19 @@ class PanGestureScreen extends Component {
 		title: 'Basic pan gesture',
 	};
 
-	_previousLeft = 0;
-	_previousTop = 0;
-	_ballProps = {};
-	_ballRefView = (null : ?{ setNativeProps(props: Object): void});
-	_ballRadius = 120;
-	_maxLeft = Util.size.width - this._ballRadius + 20;
-	_maxTop = Util.size.height - 64 - 40 - this._ballRadius;
-
 	constructor(props) {
 	  super(props);
 	  this.state = {
 	  	iconColor: 'rgba(255, 255, 255, 1)',
 	  };
+
+		this._previousLeft = 0;
+		this._previousTop = 0;
+		this._ballProps = {};
+		this._ballRefView = (null : ?{ setNativeProps(props: Object): void});
+		this._ballRadius = 120;
+		this._maxLeft = Util.size.width - this._ballRadius + 20;
+		this._maxTop = Util.size.height - 64 - 40 - this._ballRadius;
 
 	  this._ballProps = {
 	  	style: {
@@ -135,6 +135,7 @@ const styles = {
 		left: 0,
 		right: 0,
 		position: 'absolute',
+		justifyContent: 'center',
 	}
 };
 
