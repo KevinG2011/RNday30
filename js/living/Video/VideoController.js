@@ -55,6 +55,14 @@ class VideoScreen extends Component {
 			shuffle: 0,
 			name: 'video',
 		};
+		FeedService.sendRequest('feed/getVideos', params, ({ err, result }) => {
+			console.log(err.msg);
+			if (!err) {
+				console.log(result);
+			} else {
+				console.log(err.msg);
+			}
+		});
 	}
 
 	handleIndexChanged() {
@@ -115,7 +123,7 @@ const styles = {
 		flex: 1,
 	},
 	pageStyle: {
-		backgroundColor: 'purple',
+		backgroundColor: 'white',
 		width: deviceWidth,
 		flex: 1,
 		justifyContent: 'center',
