@@ -56,11 +56,10 @@ class VideoScreen extends Component {
 			name: 'video',
 		};
 		FeedService.sendRequest('feed/getVideos', params, ({ err, result }) => {
-			console.log(err.msg);
 			if (!err) {
 				console.log(result);
 			} else {
-				console.log(err.msg);
+				console.log(err.message);
 			}
 		});
 	}
