@@ -44,31 +44,13 @@ class VideoScreen extends Component {
 			idx: 0,
 			data: [],
 	  };
-	  this.handleIndexChanged = this.handleIndexChanged.bind(this);
-	  this.renderContent = this.renderContent.bind(this);
 	}
 
-	componentWillMount() {
-		const params = {
-			refresh: 1,
-			num: 20,
-			shuffle: 0,
-			name: 'video',
-		};
-		FeedService.sendRequest('feed/getVideos', params, ({ err, result }) => {
-			if (!err) {
-				console.log(result);
-			} else {
-				console.log(err.message);
-			}
-		});
-	}
-
-	handleIndexChanged() {
+	_handleIndexChanged = () => {
 		console.log('111');
 	}
 
-	renderContent() {
+	_renderContent = () => {
 		const { titles } = this.state;
 		return titles.map((title, idx) => (
 				<View style={styles.pageStyle} key={titles[idx]}>
@@ -98,22 +80,18 @@ class VideoScreen extends Component {
         scrollEventThrottle={100}
         bounces={false}
       >
-				{this.renderContent()}
+				{this._renderContent()}
 			</ScrollView>
 		);
 	}
 }
 
-const VideoController = StackNavigator(
-	{
-		Video: {
+const VideoController = StackNavigator({
+	Video: {
 			screen: VideoScreen
-		}
 	},
-  {
-    initialRouteName: 'Video',
-  }
-);
+	initialRouteName: 'Video',
+});
 
 export default VideoController;
 
