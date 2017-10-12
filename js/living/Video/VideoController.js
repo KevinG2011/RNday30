@@ -10,11 +10,10 @@ import {
 	ScrollView
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { Util } from '../../component/common';
+import ShortVideoVC from './ShortVideoVC';
 // import ViewPager from 'react-native-viewpager';
-import { FeedService } from '../../component/service/';
 
-
-const deviceWidth = Dimensions.get('window').width;
 
 class VideoScreen extends Component {
 	static navigationOptions = {
@@ -53,11 +52,10 @@ class VideoScreen extends Component {
 	_renderContent = () => {
 		const { titles } = this.state;
 		return titles.map((title, idx) => (
-				<View style={styles.pageStyle} key={titles[idx]}>
-					<Text style={styles.textStyle}>
-					  {titles[idx]}
-					</Text>
-				</View>
+				<ShortVideoVC
+					index={idx}
+					name={titles[idx]}
+				/>
 		));
 	}
 
@@ -74,7 +72,7 @@ class VideoScreen extends Component {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         contentOffset={{
-          x: deviceWidth * this.state.idx,
+          x: Util.size.width * this.state.idx,
           y: 0,
         }}
         scrollEventThrottle={100}
@@ -87,10 +85,7 @@ class VideoScreen extends Component {
 }
 
 const VideoController = StackNavigator({
-	Video: {
-			screen: VideoScreen
-	},
-	initialRouteName: 'Video',
+	Video: { screen: VideoScreen },
 });
 
 export default VideoController;
@@ -99,15 +94,4 @@ const styles = {
 	containerStyle: {
 		flex: 1,
 	},
-	pageStyle: {
-		backgroundColor: 'white',
-		width: deviceWidth,
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	textStyle: {
-		color: 'black',
-		textAlign: 'center',
-	}
 };

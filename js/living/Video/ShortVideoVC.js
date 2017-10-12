@@ -2,16 +2,14 @@
 
 import React, { Component } from 'react';
 import {
-	View
+	View,
+	Text
 } from 'react-native';
+import { Util } from '../../component/common';
+import { FeedService } from '../../component/service/';
 
 type Props = {
-  prop1: any;
-  prop2: number;
-  prop3: boolean;
-  prop4: string;
-  prop5: Array<Session>;
-  prop6: (day: number) => void;
+  name: string;
 };
 
 class ShortVideoVC extends Component {
@@ -19,7 +17,8 @@ class ShortVideoVC extends Component {
 
   constructor(props) {
     super(props);
-    this.refreshing = false;
+
+    this.loading = false;
     this.randomNum = -1;
     this.manualRefresh = false;
 
@@ -29,47 +28,78 @@ class ShortVideoVC extends Component {
   }
 
 	componentWillMount() {
-		this.loadData(false);
+		// this.loadData(false);
 	}
 
-	sendRequest = (params) => {
-		if (this.refreshing) { return };
-		this.refreshing = true;
-
-		FeedService.sendRequest('feed/getVideos', params, ({ err, result }) => {
-			if (!err) {
-				this.setState({
-					feeds: result
-				})
-			} else {
-				console.log(err.message);
-			}
-			this.refreshing = false;
+	onLoadDataRefresh = (result) => {
+		this.setState({
+			data: result
+		}, () => {
+			const { data } = this.state;
+			console.log('onLoadDataRefresh');
+			console.log(data);
 		});
 	}
 
+	onLoadDataMore = (result) => {
+		const { data } = this.state;
+		data.feeds.data.push(...result.feeds.data);
+		const newData = { ...data };
+		this.setState({
+			data: newData
+		}, () => {
+			console.log('onLoadDataMore');
+			console.log(newData);
+		});
+	}
+
+	onLoadDataEnd = () => {
+		const { data } = this.state;
+	}
+
 	loadData = (isMore = false) => {
-		if (this.refreshing) { return };
+		if (this.loading) { return; }
+		this.loading = true;
+
 		this.randomNum += isMore ? 0 : 1;
-		const shuffle = this.randomNum % 3 == 0 ? 0 : 1;
-		const { feeds } = this.state;
+		const shuffle = this.randomNum % 3 === 0 ? 0 : 1;
+		const { name = 'video' } = this.props;
 		const params = {
 			refresh: this.manualRefresh,
 			num: 20,
-			offset: feeds.offset,
-			shuffle
-			name: 'video',
+			shuffle,
+			name
 		};
-		if (!isMore) {
-
-		} else {
-
+		if (isMore) {
+			const { offset = 0 } = this.state.data.feeds;
+			params.offset = offset;
 		}
+
+		FeedService.sendRequest('feed/getVideos', params, ({ err, result }) => {
+			if (!err) {
+				if (!isMore) {
+					this.onLoadDataRefresh(result);
+				} else {
+					this.onLoadDataMore(result);
+				}
+				this.onLoadDataEnd();
+			} else {
+				console.log(err.message);
+			}
+			this.loading = false;
+		});
 	}
 
 	render() {
+		const { index, name } = this.props;
 		return (
-			<View style={styles.container}>
+			<View
+				key={index}
+				style={styles.container}
+			>
+				<Text style={styles.textStyle}>
+				  {name}
+				</Text>
 			</View>
 		);
 	}
@@ -79,8 +109,15 @@ export default ShortVideoVC;
 
 const styles = {
 	container: {
+		backgroundColor: 'white',
 		flex: 1,
+		width: Util.size.width,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
+	textStyle: {
+		color: 'black',
+		textAlign: 'center',
+	}
 };
-
 
