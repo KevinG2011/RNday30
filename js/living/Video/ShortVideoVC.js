@@ -20,7 +20,7 @@ class ShortVideoVC extends Component {
 
     this.loading = false;
     this.randomNum = -1;
-    this.manualRefresh = false;
+    this.manualRefresh = true;
 
     this.state = {
     	data: []
@@ -28,7 +28,7 @@ class ShortVideoVC extends Component {
   }
 
 	componentWillMount() {
-		// this.loadData(false);
+		this.loadData(false);
 	}
 
 	onLoadDataRefresh = (result) => {

@@ -39,7 +39,7 @@ class VideoScreen extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {
-			titles: ['推荐', '新鲜'],
+			titles: ['video', 'video_latest'],
 			idx: 0,
 			data: [],
 	  };
