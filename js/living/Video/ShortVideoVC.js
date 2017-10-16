@@ -1,18 +1,23 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
 	View,
-	Text
+	Text,
+	FlatList,
 } from 'react-native';
 import { Util } from '../../component/common';
 import { FeedService } from '../../component/service/';
+import ShortVideoListItem from './ShortVideoListItem';
+
+const SCREEN_WIDTH = Util.size.width;
+const SCREEN_HEIGHT = Util.size.height;
 
 type Props = {
   name: string;
 };
 
-class ShortVideoVC extends Component {
+class ShortVideoVC extends PureComponent {
   props: Props;
 
   constructor(props) {
@@ -76,6 +81,7 @@ class ShortVideoVC extends Component {
 		}
 
 		FeedService.sendRequest('feed/getVideos', params, ({ err, result }) => {
+			this.loading = false;
 			if (!err) {
 				if (!isMore) {
 					this.onLoadDataRefresh(result);
@@ -86,20 +92,49 @@ class ShortVideoVC extends Component {
 			} else {
 				console.log(err.message);
 			}
-			this.loading = false;
 		});
 	}
 
-	render() {
-		const { index, name } = this.props;
+	_getItemLayout = (data, index) => {
+		const layout = {
+			length: SCREEN_WIDTH,
+			offset: SCREEN_WIDTH * index,
+			index
+		};
+		return layout;
+	}
+
+	_keyExtractor = (item, index) => `${index}`;
+
+	_renderItem = ({ item, index }) => {
 		return (
-			<View
-				key={index}
-				style={styles.container}
-			>
-				<Text style={styles.textStyle}>
-				  {name}
-				</Text>
+			<ShortVideoListItem itemData={item} />
+		);
+	}
+
+	render() {
+		if (this.loading) {
+			return (
+				<View style={styles.loading}>
+					<Text style={styles.loadingTxt}>加载中...</Text>
+				</View>
+			);
+		}
+
+		const { data = [] } = this.state.data.feeds;
+		return (
+			<View style={styles.container}>
+				<FlatList
+					data={data}
+					extraData={this.state}
+					getItemLayout={this._getItemLayout}
+					renderItem={this._renderItem}
+					keyExtractor={this._keyExtractor}
+					horizontal={false}
+	        directionalLockEnabled
+	        showsHorizontalScrollIndicator={false}
+	        showsVerticalScrollIndicator={false}
+				/>
 			</View>
 		);
 	}
@@ -109,15 +144,20 @@ export default ShortVideoVC;
 
 const styles = {
 	container: {
-		backgroundColor: 'white',
+		backgroundColor: 'grey',
 		flex: 1,
-		width: Util.size.width,
+	},
+	loading: {
+		width: SCREEN_WIDTH,
+		height: SCREEN_HEIGHT,
+		backgroundColor: 'black',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	textStyle: {
-		color: 'black',
+	loadingTxt: {
 		textAlign: 'center',
+		color: 'white',
+		fontSize: 32,
 	}
 };
 

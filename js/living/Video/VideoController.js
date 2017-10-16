@@ -39,7 +39,7 @@ class VideoScreen extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {
-			titles: ['video', 'video_latest'],
+			titles: ['video'],
 			idx: 0,
 			data: [],
 	  };
@@ -53,6 +53,7 @@ class VideoScreen extends Component {
 		const { titles } = this.state;
 		return titles.map((title, idx) => (
 				<ShortVideoVC
+					key={title}
 					index={idx}
 					name={titles[idx]}
 				/>
