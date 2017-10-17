@@ -7,7 +7,7 @@ if [ '$filename' != 'huajiao_ios' ]; then
 fi
 
 set -x
-from=20171010_v606
+from=20171012_v607_noble
 to=20170901_v406_RCT
 
 git checkout $from
