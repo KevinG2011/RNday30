@@ -5,25 +5,33 @@ import {
 	TabBarIOS
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import TwitterFlow from './twitterFlow';
+
+type Props = {
+  onTabSelected: (index: number) => void;
+  renderTabContent: (index: number) => Component;
+  selectedIndex: number;
+};
 
 export default class TwitterTab extends Component {
+  props: Props;
 	constructor(props) {
 	  super(props);
+	  const { selectedIndex } = props;
 	  this.state = {
-	  	selectedIndex: 0
+	  	selectedIndex
 	  };
 	}
 
-	_onTabSelected = (selectedIndex) => {
-		if (selectedIndex !== this.state.selectedIndex) {
-			console.log(`selectedIndex : ${selectedIndex}`);
-			this.setState({ selectedIndex });
+	_onTabSelected = (index) => {
+		const { selectedIndex, onTabSelected } = this.props;
+		if (index !== selectedIndex) {
+			this.setState({ index });
+			onTabSelected(index);
 		}
 	};
 
 	render() {
-		const { selectedIndex } = this.state;
+		const { selectedIndex, renderTabContent } = this.state;
 		return (
       <TabBarIOS
       	style={styles.container}
@@ -37,7 +45,7 @@ export default class TwitterTab extends Component {
 	        onPress={() => this._onTabSelected(0)}
         	selected={selectedIndex === 0}
         >
-          <TwitterFlow />
+          { renderTabContent() }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
@@ -47,7 +55,7 @@ export default class TwitterTab extends Component {
 	        onPress={() => this._onTabSelected(1)}
 	        selected={selectedIndex === 1}
         >
-          <TwitterFlow />
+        	{ renderTabContent() }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
@@ -57,7 +65,7 @@ export default class TwitterTab extends Component {
 	        onPress={() => this._onTabSelected(2)}
         	selected={selectedIndex === 2}
         >
-          <TwitterFlow />
+        	{ renderTabContent() }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
@@ -67,7 +75,7 @@ export default class TwitterTab extends Component {
 	        onPress={() => this._onTabSelected(3)}
 	        selected={selectedIndex === 3}
         >
-          <TwitterFlow />
+        	{ renderTabContent() }
         </Icon.TabBarItem>
 
       </TabBarIOS>

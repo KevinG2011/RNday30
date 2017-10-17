@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import {
 	View
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import TwitterTab from '../common/twitterTab';
 
 type Props = {
   prop1: any;
@@ -14,33 +16,36 @@ type Props = {
   prop6: (day: number) => void;
 };
 
-const Name = (props) => {
+class TwitterApp extends Component {
   props: Props;
 
-	const { data } = props;
-	return (
-		<View style={styles.containerStyle}>
-		</View>
-	);
-};
+	_renderTabContent = index => {
+    return <View style={{flex: 1}} />
+	}
 
-class Name extends Component {
-  props: Props;
+	_onTabSelected = index => {
+		console.log(index);
+	}
 
 	render() {
-		const { data } = this.props;
 		return (
 			<View style={styles.container}>
+				<TwitterTab
+					renderTabContent={this._renderTabContent}
+					onTabSelected={this._onTabSelected}
+					selectedIndex={0}
+				/>
 			</View>
 		);
 	}
 }
 
-export default Name;
+export default TwitterApp;
 
 const styles = {
 	container: {
 		flex: 1,
+		backgroundColor: 'white',
 	},
 };
 

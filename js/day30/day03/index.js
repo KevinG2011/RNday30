@@ -8,7 +8,8 @@ import {
 	StatusBar,
 	View,
 } from 'react-native';
-import TwitterTab from './twitterTab';
+import TwitterTab from '../common/twitterTab';
+import TwitterFlow from './twitterFlow';
 import TwitterSplash from './twitterSplash';
 
 export default class TwitterScreen extends Component {
@@ -28,11 +29,23 @@ export default class TwitterScreen extends Component {
 		return false;
 	}
 
+	_renderTabContent = index => (
+    <TwitterFlow />
+	);
+
+	_onTabSelected = index => {
+		console.log(index);
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
 		   	<StatusBar barStyle="dark-content" />
-				<TwitterTab />
+				<TwitterTab
+					renderTabContent={this._renderTabContent}
+					onTabSelected={this._onTabSelected}
+					selectedIndex={0}
+				/>
 				{this._renderSplash()}
 			</View>
 		);

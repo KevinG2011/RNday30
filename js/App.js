@@ -7,7 +7,8 @@ import {
 // import EntranceScreen from './day30/day03/index';
 // import FindMyLocation from './day30/day05/index';
 // import MoveBall from './day30/day07/index';
-import VideoController from './living/Video/VideoController';
+import TwitterTab from './day30/day09/index'
+// import VideoController from './living/Video/VideoController';
 
 
 if (!__DEV__) {
@@ -23,7 +24,7 @@ if (!__DEV__) {
 class App extends Component {
 	render() {
 		return (
-      <VideoController />
+      <TwitterTab />
 		);
 	}
 }
