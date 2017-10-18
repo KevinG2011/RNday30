@@ -29,9 +29,12 @@ export default class TwitterScreen extends Component {
 		return false;
 	}
 
-	_renderTabContent = index => (
-    <TwitterFlow />
-	);
+	_renderTabContent = index => {
+		console.log(`_renderTabContent : ${index}`);
+    return (
+			<TwitterFlow />
+    );
+	}
 
 	_onTabSelected = index => {
 		console.log(index);

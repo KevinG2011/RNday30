@@ -31,7 +31,7 @@ export default class TwitterTab extends Component {
 	};
 
 	render() {
-		const { selectedIndex, renderTabContent } = this.state;
+		const { selectedIndex, renderTabContent } = this.props;
 		return (
       <TabBarIOS
       	style={styles.container}
@@ -45,7 +45,7 @@ export default class TwitterTab extends Component {
 	        onPress={() => this._onTabSelected(0)}
         	selected={selectedIndex === 0}
         >
-          { renderTabContent() }
+          { renderTabContent(0) }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
@@ -55,7 +55,7 @@ export default class TwitterTab extends Component {
 	        onPress={() => this._onTabSelected(1)}
 	        selected={selectedIndex === 1}
         >
-        	{ renderTabContent() }
+        	{ renderTabContent(1) }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
@@ -65,7 +65,7 @@ export default class TwitterTab extends Component {
 	        onPress={() => this._onTabSelected(2)}
         	selected={selectedIndex === 2}
         >
-        	{ renderTabContent() }
+        	{ renderTabContent(2) }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
@@ -75,7 +75,7 @@ export default class TwitterTab extends Component {
 	        onPress={() => this._onTabSelected(3)}
 	        selected={selectedIndex === 3}
         >
-        	{ renderTabContent() }
+        	{ renderTabContent(3) }
         </Icon.TabBarItem>
 
       </TabBarIOS>
