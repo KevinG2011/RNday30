@@ -6,21 +6,14 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TwitterTab from '../common/twitterTab';
-
-type Props = {
-  prop1: any;
-  prop2: number;
-  prop3: boolean;
-  prop4: string;
-  prop5: Array<Session>;
-  prop6: (day: number) => void;
-};
+import TwitterUser from './twitterUser';
 
 class TwitterApp extends Component {
-  props: Props;
 
 	_renderTabContent = index => {
-    return <View style={{flex: 1}} />
+    return (
+    	<TwitterUser />
+    );
 	}
 
 	_onTabSelected = index => {
@@ -48,5 +41,3 @@ const styles = {
 		backgroundColor: 'white',
 	},
 };
-
-
