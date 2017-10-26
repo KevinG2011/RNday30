@@ -7,6 +7,7 @@ import {
 	Image,
 	TouchableHighlight
 } from 'react-native';
+import { Util } from '../../component/common/';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class TwitterProfile extends Component {
@@ -35,16 +36,16 @@ class TwitterProfile extends Component {
 
 				  	<TouchableHighlight
 				  	  onPress={() => this._onPressBtn(2)}
-				  	  style={styles.settingsControl}
+				  	  style={[styles.control, styles.peopleControl]}
 				  	>
-							<Icon name="ios-people" size={20} color='#8999a5' />
+							<Icon name="ios-people" size={30} color='#8999a5' />
 				  	</TouchableHighlight>
 
 				  	<TouchableHighlight
 				  	  onPress={() => this._onPressBtn(3)}
-				  	  style={styles.settingsControl}
+				  	  style={[styles.control, styles.editControl]}
 				  	>
-							<Text style={styles.editControl}>编辑个人资料</Text>
+							<Text style={styles.editText}>编辑个人资料</Text>
 				  	</TouchableHighlight>
 
 				  </View>
@@ -62,16 +63,17 @@ const styles = {
 		backgroundColor: '#555',
 	},
 	controlContainer: {
-		flex: 1,
+		width: Util.size.width,
 		flexDirection: 'row',
-		backgroundColor: 'white',
-		height: 80,
-		alignItems: 'flex-start',
+		height: 68,
+		alignItems: 'center',
+		backgroundColor: '#222',
 	},
 	iconContainer: {
 		flex: 1,
 		flexDirection: 'row',
 		alignItems: 'center',
+		paddingLeft: 30,
 	},
 	icon: {
 		width: 68,
@@ -85,11 +87,31 @@ const styles = {
 	},
 	settingsControl: {
 		width: 30,
+		marginRight: 4,
+	},
+	control: {
+		borderWidth: 1,
+		borderColor: '#8999a5',
+		borderStyle: 'solid',
+		borderRadius: 3,
+		alignItems: 'center',
+		justifyContent: 'center',
+		paddingTop: 3,
+		paddingLeft: 5,
+		paddingBottom: 3,
+		paddingRight: 5,
+		marginRight: 8,
 	},
 	peopleControl: {
-
+		width: 30,
+		height: 30,
 	},
 	editControl: {
-
+		width: 120,
+		height: 30,
+	},
+	editText: {
+		color: '#8999a5',
+		fontSize: 14,
 	},
 };

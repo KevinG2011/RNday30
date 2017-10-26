@@ -5,11 +5,12 @@ import {
 	View,
 	Image,
 	ScrollView,
-	StatusBar
+	StatusBar,
 } from 'react-native';
 import { Util } from '../../component/common/';
 import TwitterHeader from './twitterHeader';
 import TwitterProfile from './twitterProfile';
+import TwitterFollowing from './twitterFollowing';
 
 class TwitterUser extends Component {
 	_onPressSettings = () => {
