@@ -3,21 +3,33 @@
 import React, { Component } from 'react';
 import {
 	View,
-	Image
+	Image,
+	ScrollView,
+	StatusBar
 } from 'react-native';
 import { Util } from '../../component/common/';
+import TwitterHeader from './twitterHeader';
+import TwitterProfile from './twitterProfile';
 
 class TwitterUser extends Component {
+	_onPressSettings = () => {
+
+	}
+
 	render() {
-		const { data } = this.props;
 		return (
 			<View style={styles.container}>
-				<View style={styles.userPanel}>
-					<Image
-					  style={styles.panelImg}
-					  source={require('./img/banner.png')}
-					/>
-				</View>
+		   	<StatusBar
+		     	barStyle="dark-content"
+		   	/>
+				<ScrollView
+					contentContainerStyle={styles.contentContainer}
+					automaticallyAdjustContentInsets={false}
+				>
+				  <View style={styles.placeHolder} />
+					<TwitterProfile style={styles.profile} />
+				</ScrollView>
+				<TwitterHeader style={styles.headerContainer} />
 			</View>
 		);
 	}
@@ -30,14 +42,17 @@ const styles = {
 		flex: 1,
 		backgroundColor: '#666',
 	},
-	userPanel: {
-		flex: 1,
-		backgroundColor: 'white',
-		height: 300,
+	contentContainer: {
+		width: Util.size.width,
+		height: Util.size.height + 150,
 	},
-	panelImg: {
+	headerContainer: {
+		position: 'absolute',
+	},
+	placeHolder: {
 		width: Util.size.width,
 		height: 150,
+		backgroundColor: 'purple',
 	},
 };
 
