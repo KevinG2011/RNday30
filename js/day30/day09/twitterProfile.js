@@ -5,13 +5,18 @@ import {
 	View,
 	Text,
 	Image,
-	TouchableHighlight
+	TouchableHighlight,
+	SegmentedControlIOS
 } from 'react-native';
-import { Util } from '../../component/common/';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Util } from '../../component/common/';
 
 class TwitterProfile extends Component {
 	_onPressBtn = (tag) => {
+
+	}
+
+	_onValueChange = (sender) => {
 
 	}
 
@@ -47,9 +52,25 @@ class TwitterProfile extends Component {
 				  	>
 							<Text style={styles.editText}>编辑个人资料</Text>
 				  	</TouchableHighlight>
-
 				  </View>
 				</View>
+			  <View style={styles.infoContainer}>
+			  	<Text style={styles.infoName}>Github</Text>
+			  	<Text style={styles.infoAccount}>@Github</Text>
+			  	<View style={styles.followContainer}>
+			  		<Text style={styles.followTxt}><Text style={styles.fontEm}>183</Text> 正在关注</Text>
+			  		<Text style={styles.followTxt}><Text style={styles.fontEm}>830k</Text> 关注者</Text>
+			  	</View>
+			  </View>
+			  <View style={styles.segmentContainer}>
+					<SegmentedControlIOS
+						style={styles.segment}
+						values={['推文', '媒体', '喜欢']}
+						selectedIndex={0}
+						tintColor='#2aa2ef'
+						onValueChange={this._onValueChange}
+					/>
+			  </View>
 			</View>
 		);
 	}
@@ -59,7 +80,6 @@ export default TwitterProfile;
 
 const styles = {
 	container: {
-		flex: 1,
 		backgroundColor: '#555',
 	},
 	controlContainer: {
@@ -67,7 +87,7 @@ const styles = {
 		flexDirection: 'row',
 		height: 68,
 		alignItems: 'center',
-		backgroundColor: '#222',
+		backgroundColor: 'white',
 	},
 	iconContainer: {
 		flex: 1,
@@ -113,5 +133,43 @@ const styles = {
 	editText: {
 		color: '#8999a5',
 		fontSize: 14,
+	},
+	infoContainer: {
+		backgroundColor: 'white',
+		height: 60,
+		paddingLeft: 15,
+	},
+	infoName: {
+		color: '#292f33',
+		fontSize: 20,
+		fontWeight: '500',
+		paddingTop: 15,
+	},
+	infoAccount: {
+		color: '#66757f',
+		paddingTop: 5,
+	},
+	followContainer: {
+		flexDirection: 'row',
+		backgroundColor: 'white',
+		paddingTop: 5,
+	},
+	followTxt: {
+		color: '#95a4ae',
+		width: 110,
+	},
+	fontEm: {
+		color: '#292f33',
+		fontWeight: '500',
+	},
+	segmentContainer: {
+		height: 60,
+		width: null,
+		backgroundColor: 'white',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	segment: {
+		width: Util.size.width - 30,
 	},
 };

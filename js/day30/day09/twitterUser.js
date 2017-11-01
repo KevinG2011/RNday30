@@ -10,7 +10,7 @@ import {
 import { Util } from '../../component/common/';
 import TwitterHeader from './twitterHeader';
 import TwitterProfile from './twitterProfile';
-import TwitterFollowing from './twitterFollowing';
+import TwitterMoreInfo from './twitterMoreInfo';
 
 class TwitterUser extends Component {
 	_onPressSettings = () => {
@@ -29,6 +29,7 @@ class TwitterUser extends Component {
 				>
 				  <View style={styles.placeHolder} />
 					<TwitterProfile style={styles.profile} />
+					<TwitterMoreInfo style={styles.moreinfo} />
 				</ScrollView>
 				<TwitterHeader style={styles.headerContainer} />
 			</View>
@@ -41,7 +42,7 @@ export default TwitterUser;
 const styles = {
 	container: {
 		flex: 1,
-		backgroundColor: '#666',
+		backgroundColor: 'white',
 	},
 	contentContainer: {
 		width: Util.size.width,
@@ -53,7 +54,14 @@ const styles = {
 	placeHolder: {
 		width: Util.size.width,
 		height: 150,
-		backgroundColor: 'purple',
+		backgroundColor: 'white',
+	},
+	profile: {
+		width: null,
+		height: 68 + 120,
+	},
+	moreinfo: {
+		flex: 1,
 	},
 };
 
