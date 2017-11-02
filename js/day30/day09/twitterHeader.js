@@ -10,7 +10,7 @@ import { Util } from '../../component/common/';
 const TwitterHeader = (props) => {
 	const { style } = props;
 	return (
-		<View style={[styles.container, style]}>
+		<View style={style}>
 			<Image
 			  style={styles.headerbg}
 			  source={require('./img/banner.png')}
@@ -22,11 +22,6 @@ const TwitterHeader = (props) => {
 export default TwitterHeader;
 
 const styles = {
-	container: {
-		width: Util.size.width,
-		height: 150,
-		backgroundColor: 'white',
-	},
 	headerbg: {
 		width: Util.size.width,
 		height: 150,
