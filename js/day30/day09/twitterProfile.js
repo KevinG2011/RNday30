@@ -25,12 +25,6 @@ class TwitterProfile extends Component {
 		return (
 			<View style={[styles.container, style]}>
 				<View style={styles.controlContainer}>
-				  <View style={[styles.iconContainer]}>
-						<Image
-						  style={styles.icon}
-						  source={require('./img/icon.png')}
-						/>
-				  </View>
 				  <View style={styles.btnContainer}>
 				  	<TouchableHighlight
 				  	  onPress={() => this._onPressBtn(1)}
@@ -71,6 +65,12 @@ class TwitterProfile extends Component {
 						onValueChange={this._onValueChange}
 					/>
 			  </View>
+			  <View style={[styles.iconContainer]}>
+					<Image
+					  style={styles.icon}
+					  source={require('./img/icon.png')}
+					/>
+			  </View>
 			</View>
 		);
 	}
@@ -90,10 +90,13 @@ const styles = {
 		backgroundColor: 'white',
 	},
 	iconContainer: {
-		flex: 1,
-		flexDirection: 'row',
+		justifyContent: 'center',
 		alignItems: 'center',
-		paddingLeft: 30,
+		width: 68,
+		height: 68,
+		position: 'absolute',
+		top: 10,
+		left: 15,
 	},
 	icon: {
 		width: 68,

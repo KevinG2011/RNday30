@@ -17,35 +17,37 @@ const HEADER_TOP_MIN = -75;
 class TwitterUser extends Component {
 	constructor(props) {
 	  super(props);
-	  this._scrollView = undefined;
-
-	  this.state = {
-	  	bannerTop: 0,
-	  	bannerOpacity: 1,
+	  this._scrollView = null;
+	  this._banner = (null : ?{ setNativeProps(props: Object): void });
+	  this._bannerProps = {
+	  	style: {
+				position: 'absolute',
+				width: Util.size.width,
+				height: 150,
+				backgroundColor: 'white',
+	  		top: 0,
+	  		opacity: 1,
+	  	},
 	  };
 	}
 
-	_onPressSettings = () => {
-
-	}
-
-	_onScroll = (e) => {
+	_onScrollViewDidScroll = (e) => {
 		const { x, y } = e.nativeEvent.contentOffset;
 		const bannerTop = Math.min(0, Math.max(HEADER_TOP_MIN, -y));
-		const bannerOpacity = 1.2 - (Math.abs(bannerTop) / -HEADER_TOP_MIN);
-		console.log(`bannerOpacity : ${bannerOpacity}`);
-		this.setState({
-			bannerTop,
-			bannerOpacity
-		});
-	}
-
-	render() {
-		const { bannerTop, bannerOpacity } = this.state;
-		const bannerstyle = {
+		const bannerOpacity = 1.1 - (Math.abs(bannerTop) / -HEADER_TOP_MIN);
+		const style = {
 			top: bannerTop,
 			opacity: bannerOpacity,
 		};
+		this._bannerProps.style = style;
+		if (this._banner) {
+			//Direct Manipulation
+			this._banner.setNativeProps(this._bannerProps);
+		}
+	}
+
+	render() {
+		const { style } = this._bannerProps;
 
 		return (
 			<View style={styles.container}>
@@ -56,14 +58,17 @@ class TwitterUser extends Component {
 					ref={scrollView => (this._scrollView = scrollView)}
 					contentContainerStyle={styles.contentContainer}
 					automaticallyAdjustContentInsets={false}
-					scrollEventThrottle={60}
-					onScroll={this._onScroll}
+					scrollEventThrottle={30}
+					onScroll={this._onScrollViewDidScroll}
 				>
 				  <View style={styles.placeHolder} />
 					<TwitterProfile style={styles.profile} />
 					<TwitterMoreInfo style={styles.moreinfo} />
 				</ScrollView>
-				<TwitterHeader style={[styles.headerContainer, bannerstyle]} />
+				<TwitterHeader
+					ref={banner => (this._banner = banner)}
+					style={style}
+				/>
 			</View>
 		);
 	}
@@ -79,12 +84,6 @@ const styles = {
 	contentContainer: {
 		width: Util.size.width,
 		height: Util.size.height + 150,
-	},
-	headerContainer: {
-		position: 'absolute',
-		width: Util.size.width,
-		height: 150,
-		backgroundColor: 'white',
 	},
 	placeHolder: {
 		width: Util.size.width,
