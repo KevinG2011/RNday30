@@ -139,7 +139,6 @@ const styles = {
 	},
 	infoContainer: {
 		backgroundColor: 'white',
-		height: 60,
 		paddingLeft: 15,
 	},
 	infoName: {

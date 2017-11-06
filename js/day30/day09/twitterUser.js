@@ -21,10 +21,6 @@ class TwitterUser extends Component {
 	  this._banner = (null : ?{ setNativeProps(props: Object): void });
 	  this._bannerProps = {
 	  	style: {
-				position: 'absolute',
-				width: Util.size.width,
-				height: 150,
-				backgroundColor: 'white',
 	  		top: 0,
 	  		opacity: 1,
 	  	},
@@ -34,21 +30,16 @@ class TwitterUser extends Component {
 	_onScrollViewDidScroll = (e) => {
 		const { x, y } = e.nativeEvent.contentOffset;
 		const bannerTop = Math.min(0, Math.max(HEADER_TOP_MIN, -y));
-		const bannerOpacity = 1.1 - (Math.abs(bannerTop) / -HEADER_TOP_MIN);
-		const style = {
+		const bannerOpacity = 1 - (Math.abs(bannerTop) / -HEADER_TOP_MIN);
+		this._bannerProps.style = {
 			top: bannerTop,
 			opacity: bannerOpacity,
 		};
-		this._bannerProps.style = style;
-		if (this._banner) {
-			//Direct Manipulation
-			this._banner.setNativeProps(this._bannerProps);
-		}
+		//Direct Manipulation
+		this._banner && this._banner.setNativeProps(this._bannerProps);
 	}
 
 	render() {
-		const { style } = this._bannerProps;
-
 		return (
 			<View style={styles.container}>
 		   	<StatusBar
@@ -67,7 +58,7 @@ class TwitterUser extends Component {
 				</ScrollView>
 				<TwitterHeader
 					ref={banner => (this._banner = banner)}
-					style={style}
+					style={[styles.banner, this._bannerProps.style]}
 				/>
 			</View>
 		);
@@ -97,5 +88,11 @@ const styles = {
 	moreinfo: {
 		flex: 1,
 	},
+	banner: {
+		position: 'absolute',
+		width: Util.size.width,
+		height: 150,
+		backgroundColor: 'white',
+	}
 };
 
