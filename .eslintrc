@@ -10,5 +10,6 @@
   	"space-infix-ops": 0,
   	"max-len": 0,
     "no-unused-vars": 0,
+    "global-require": 0,
 	},
 }
