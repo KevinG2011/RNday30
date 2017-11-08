@@ -60,7 +60,7 @@ class TwitterSplash extends Component {
 	render() {
 		const { opacityAnim, transformAnim } = this.state;
 		const opacityStyle = { opacity: opacityAnim };
-		const transStyle = {
+		const transformStyle = {
 			transform: [
 				{
 					scale: transformAnim
@@ -71,7 +71,7 @@ class TwitterSplash extends Component {
 			<Animated.View style={[styles.container, opacityStyle]}>
 				<AnimatedIcon
 					size={60}
-					style={[styles.splash, transStyle]}
+					style={[styles.splash, transformStyle]}
 					name="logo-twitter"
 				/>
 			</Animated.View>

@@ -57,29 +57,29 @@ class TumblrApp extends Component {
 		if (isShowMenu) {
 			const { shiftAnim } = this.state;
 			return (
-				<Image style={styles.menu} source={require('./img/tumblrblur.png')} >
+				<Image style={styles.menu} source={{ uri: 'tumblrblur' }} >
 					<Animated.View style={[styles.menuItem1, { left: shiftAnim }]}>
-						<Image style={styles.menuImg} source={require('./img/tumblr-text.png')} />
+						<Image style={styles.menuImg} source={{ uri: 'tumblr-text' }} />
 						<Text style={styles.menuText}>Text</Text>
 					</Animated.View>
 					<Animated.View style={[styles.menuItem2, { right: shiftAnim }]}>
-						<Image style={styles.menuImg} source={require('./img/tumblr-photo.png')} />
+						<Image style={styles.menuImg} source={{ uri: 'tumblr-photo' }} />
 						<Text style={styles.menuText}>Photo</Text>
 					</Animated.View>
 					<Animated.View style={[styles.menuItem3, { left: shiftAnim }]}>
-						<Image style={styles.menuImg} source={require('./img/tumblr-quote.png')} />
+						<Image style={styles.menuImg} source={{ uri: 'tumblr-quote' }} />
 						<Text style={styles.menuText}>Quote</Text>
 					</Animated.View>
 					<Animated.View style={[styles.menuItem4, { right: shiftAnim }]}>
-						<Image style={styles.menuImg} source={require('./img/tumblr-link.png')} />
+						<Image style={styles.menuImg} source={{ uri: 'tumblr-link' }} />
 						<Text style={styles.menuText}>Link</Text>
 					</Animated.View>
 					<Animated.View style={[styles.menuItem5, { left: shiftAnim }]}>
-						<Image style={styles.menuImg} source={require('./img/tumblr-chat.png')} />
+						<Image style={styles.menuImg} source={{ uri: 'tumblr-chat' }} />
 						<Text style={styles.menuText}>Chat</Text>
 					</Animated.View>
 					<Animated.View style={[styles.menuItem6, { right: shiftAnim }]}>
-						<Image style={styles.menuImg} source={require('./img/tumblr-audio.png')} />
+						<Image style={styles.menuImg} source={{ uri: 'tumblr-audio' }} />
 						<Text style={styles.menuText}>Audio</Text>
 					</Animated.View>
 					<TouchableHighlight
@@ -103,7 +103,7 @@ class TumblrApp extends Component {
 				<TouchableWithoutFeedback onPress={this.popUpMenu.bind(this)}>
 					<Image
 					  style={styles.bgImg}
-				  	source={require('./img/tumblr.png')}
+				  	source={{ uri: 'tumblr' }}
 					/>
 				</TouchableWithoutFeedback>
 
@@ -122,6 +122,7 @@ const styles = {
 	},
 	bgImg: {
 		width: Util.size.width,
+		height: Util.size.height,
 		resizeMode: 'contain',
 	},
 	menu: {
@@ -175,15 +176,21 @@ const styles = {
 	},
 	dismissBtn: {
 		position: 'absolute',
-		width: Util.size.width,
+		width: 200,
+		height: 40,
+		left: (Util.size.width - 200) / 2,
+		bottom: 20,
 		justifyContent: 'center',
 		alignItems: 'center',
-		left: 0,
-		bottom: 40,
+		padding: 10,
+		borderWidth: 1,
+		borderColor: 'white',
+		borderStyle: 'solid',
+		borderRadius: 4,
 	},
 	dismissText: {
 		textAlign: 'center',
-		color: 'rgba(255, 255, 255, 0.2)',
+		color: 'rgba(255, 255, 255, 0.6)',
 		fontWeight: '700',
 		backgroundColor: 'transparent',
 	},
