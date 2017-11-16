@@ -57,7 +57,7 @@ class GLApp extends Component {
 			  </View>
 			  <View style={styles.titleContainer}>
 			  	<Text style={styles.text}>Progress Pie:</Text>
-					<Surface width={Util.size.width} height={200} backgroundColor='transparent'>
+					<Surface width={Util.size.width} height={200} backgroundColor='black'>
 						<PieProgressGL progress={progress} />
 					</Surface>
 					<Slider
@@ -78,6 +78,7 @@ const styles = {
 	contentContainer: {
 		backgroundColor: '#fff',
 		paddingTop: 60,
+		paddingBottom: 60,
 	},
 	titleContainer: {
 		alignItems: 'center',

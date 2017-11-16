@@ -93,7 +93,7 @@ const pieProgressFields = {
 	displayName: 'PieProgress',
 	defaultProps: {
 		colorInside: [0, 0, 0, 0],
-		colorOutside: [0, 0, 0, 0],
+		colorOutside: [0, 0, 0, 0.8],
 		radius: 0.4,
 	},
 };
