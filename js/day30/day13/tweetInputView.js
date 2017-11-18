@@ -6,7 +6,9 @@ import {
 	Image,
 	TextInput
 } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { inputTextChanged } from '../../actions/';
 
 class TweetInputView extends Component {
 	constructor(props) {
@@ -19,6 +21,7 @@ class TweetInputView extends Component {
 	}
 
 	render() {
+		const { maxLength } = this.props;
 		return (
 			<View style={styles.container}>
 				<View style={styles.iconContainer}>
@@ -28,9 +31,9 @@ class TweetInputView extends Component {
 				<TextInput
 					ref={input => (this._textInput = input)}
 					style={styles.textArea}
-					maxLength={140}
+					maxLength={maxLength}
 					multiline
-					placeholder='有什么新鲜事?'
+					placeholder={`有什么新鲜事? (${maxLength})`}
 					selectionColor='#2aa2ef'
 					placeholderTextColor='#ced8de'
 					onChangeText={this.onChangeText.bind(this)}
@@ -40,7 +43,18 @@ class TweetInputView extends Component {
 	}
 }
 
-export default TweetInputView;
+const mapStateToProps = (state) => {
+	const { maxLength } = state.tweet;
+	return {
+		maxLength
+	};
+};
+
+const actions = {
+	inputTextChanged
+};
+
+export default connect(mapStateToProps, actions)(TweetInputView);
 
 const styles = {
 	container: {
