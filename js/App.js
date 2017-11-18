@@ -11,7 +11,7 @@ import {
 // import VideoController from './living/Video/VideoController';
 // import TwitterApp from './day30/day09/';
 // import TumblrApp from './day30/day10/';
-import GLApp from './day30/day11/';
+import TweetPost from './day30/day11/';
 
 if (!__DEV__) {
   global.console = {
@@ -26,7 +26,7 @@ if (!__DEV__) {
 class App extends Component {
 	render() {
 		return (
-      <GLApp />
+      <TweetPost />
 		);
 	}
 }
