@@ -19,10 +19,11 @@ class TweetPost extends Component {
 	}
 
 	render() {
+		const { remainLength } = this.props;
 		return (
 			<View style={styles.container}>
 				<TweetInputView />
-				<TweetEditView />
+				<TweetEditView remainLength={remainLength} />
 			</View>
 		);
 	}

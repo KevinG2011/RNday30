@@ -17,7 +17,7 @@ class TweetInputView extends Component {
 	}
 
 	onChangeText(text) {
-		console.log(`onChangeText : ${text}`);
+		this.props.inputTextChanged(text);
 	}
 
 	render() {
@@ -33,7 +33,7 @@ class TweetInputView extends Component {
 					style={styles.textArea}
 					maxLength={maxLength}
 					multiline
-					placeholder={`有什么新鲜事? (${maxLength})`}
+					placeholder='有什么新鲜事?'
 					selectionColor='#2aa2ef'
 					placeholderTextColor='#ced8de'
 					onChangeText={this.onChangeText.bind(this)}
