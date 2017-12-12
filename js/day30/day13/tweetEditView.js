@@ -4,14 +4,53 @@ import React, { Component } from 'react';
 import {
 	View,
 	Text,
+	Image,
 	TouchableHighlight,
+	CameraRoll,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Util } from '../../component/common/';
 
 class TweetEditView extends Component {
+	constructor(props) {
+	  super(props);
+	  this.state = {
+	  	images: [],
+	  };
+	}
+
+	loadPhotoCompletion = (data) => {
+		const assets = data.edges;
+		const photos = assets.map((asset) => asset.node.image);
+		this.setState({
+			images: photos,
+		});
+	}
+
+	loadPhotoError = (error) => {
+		console.log(error);
+	}
+
+	componentDidMount() {
+		const fetchParams = { first: 4 };
+	  CameraRoll.getPhotos(fetchParams).done(this.loadPhotoCompletion, this.loadPhotoError);
+	}
+
 	onSendPressed() {
 
+	}
+
+	renderImages() {
+		return this.state.images.map((image, index) => {
+			return (
+				<View key={index} style={styles.imageIcon}>
+					<Image
+					  style={styles.image}
+					  source={{ uri: image.uri }}
+					/>
+				</View>
+			);
+		});
 	}
 
 	render() {
@@ -41,6 +80,7 @@ class TweetEditView extends Component {
 					<View style={styles.imageIcon}>
 						<Icon name='ios-camera' size={80} color='#2aa2ef' />
 					</View>
+					{this.renderImages()}
 				</View>
 			</View>
 		);
@@ -104,8 +144,23 @@ const styles = {
 		color: '#fff',
 		fontSize: 14,
 	},
-	imageIcon: {
-
+	imageGrid: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
 	},
+	imageIcon: {
+		width: Util.size.width/3,
+		height: 113,
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderRightWidth: 1,
+		borderRightColor: '#ddd',
+		borderBottomWidth: 1,
+		borderBottomColor: '#ddd',
+	},
+	image: {
+		width: Util.size.width / 3,
+		height: 113,
+	}
 };
 

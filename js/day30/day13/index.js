@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import {
 	View,
 	Text,
-	CameraRoll
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
