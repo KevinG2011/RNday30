@@ -13,21 +13,16 @@ import ShortVideoListItem from './ShortVideoListItem';
 const SCREEN_WIDTH = Util.size.width;
 const SCREEN_HEIGHT = Util.size.height;
 
-type Props = {
-  name: string;
-};
-
 class ShortVideoVC extends PureComponent {
-  props: Props;
-
   constructor(props) {
     super(props);
-
     this.loading = false;
     this.randomNum = -1;
     this.manualRefresh = true;
-
+  	const columns = 1;
     this.state = {
+    	columns,
+    	cellSize: Util.size.width / columns,
     	data: []
     };
   }
@@ -96,9 +91,10 @@ class ShortVideoVC extends PureComponent {
 	}
 
 	_getItemLayout = (data, index) => {
+		const { cellSize } = this.state;
 		const layout = {
-			length: SCREEN_WIDTH,
-			offset: SCREEN_WIDTH * index,
+			length: cellSize,
+			offset: cellSize * index,
 			index
 		};
 		return layout;
@@ -107,8 +103,9 @@ class ShortVideoVC extends PureComponent {
 	_keyExtractor = (item, index) => `${index}`;
 
 	_renderItem = ({ item, index }) => {
+		const { cellSize } = this.state;
 		return (
-			<ShortVideoListItem itemData={item} />
+			<ShortVideoListItem itemData={item} itemSize={cellSize} />
 		);
 	}
 
@@ -120,12 +117,12 @@ class ShortVideoVC extends PureComponent {
 				</View>
 			);
 		}
-
-		const { data = [] } = this.state.data.feeds;
+		const { columns, data } = this.state;
+		const { data: feedData = [] } = data.feeds;
 		return (
 			<View style={styles.container}>
 				<FlatList
-					data={data}
+					data={feedData}
 					extraData={this.state}
 					getItemLayout={this._getItemLayout}
 					renderItem={this._renderItem}
@@ -134,6 +131,7 @@ class ShortVideoVC extends PureComponent {
 	        directionalLockEnabled
 	        showsHorizontalScrollIndicator={false}
 	        showsVerticalScrollIndicator={false}
+	        numColumns={columns}
 				/>
 			</View>
 		);
@@ -144,8 +142,9 @@ export default ShortVideoVC;
 
 const styles = {
 	container: {
-		backgroundColor: 'grey',
-		flex: 1,
+		backgroundColor: 'white',
+		height: SCREEN_HEIGHT,
+		width: SCREEN_WIDTH,
 	},
 	loading: {
 		width: SCREEN_WIDTH,

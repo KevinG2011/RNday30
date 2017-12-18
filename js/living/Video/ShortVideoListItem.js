@@ -5,19 +5,17 @@ import {
 	View,
 	Image
 } from 'react-native';
-import { Util } from '../../component/common/';
-
-const ITEM_WIDTH = Util.size.width;
 
 class ShortVideoListItem extends PureComponent {
 	render() {
-		const { type, feed, background = undefined } = this.props.itemData;
-		const coverUrl = type == 6 ? background : feed.image;
+		const { itemData, itemSize } = this.props;
+		const { type, feed, background = undefined } = itemData;
+		const coverUrl = type === 6 ? background : feed.image;
 		return (
-			<View style={styles.container}>
+			<View style={{ width: itemSize, height: itemSize }}>
 				<Image
 				  style={styles.coverImg}
-				  source={{uri: coverUrl }}
+				  source={{ uri: coverUrl }}
 				/>
 			</View>
 		);
@@ -27,13 +25,7 @@ class ShortVideoListItem extends PureComponent {
 export default ShortVideoListItem;
 
 const styles = {
-	container: {
-		width: ITEM_WIDTH,
-		height: ITEM_WIDTH,
-	},
 	coverImg: {
 		flex: 1,
 	}
 };
-
-

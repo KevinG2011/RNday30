@@ -62,25 +62,27 @@ class VideoScreen extends Component {
 
 	render() {
 		return (
-			<ScrollView
-				style={styles.containerStyle}
-        ref='scrollview'
-        horizontal
-        pagingEnabled
-        removeClippedSubviews
-        automaticallyAdjustContentInsets={false}
-        directionalLockEnabled
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        contentOffset={{
-          x: Util.size.width * this.state.idx,
-          y: 0,
-        }}
-        scrollEventThrottle={100}
-        bounces={false}
-      >
-				{this._renderContent()}
-			</ScrollView>
+			<View style={styles.containerStyle}>
+				<ScrollView
+					style={{ flex: 1 }}
+	        ref='scrollview'
+	        horizontal
+	        pagingEnabled
+	        removeClippedSubviews
+	        automaticallyAdjustContentInsets={false}
+	        directionalLockEnabled
+	        showsHorizontalScrollIndicator={false}
+	        showsVerticalScrollIndicator={false}
+	        contentOffset={{
+	          x: Util.size.width * this.state.idx,
+	          y: 0,
+	        }}
+	        scrollEventThrottle={100}
+	        bounces={false}
+	      >
+					{this._renderContent()}
+				</ScrollView>
+			</View>
 		);
 	}
 }
@@ -93,6 +95,7 @@ export default VideoController;
 
 const styles = {
 	containerStyle: {
-		flex: 1,
+		width: Util.size.width,
+		height: Util.size.height - 64,
 	},
 };
