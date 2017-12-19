@@ -37,7 +37,6 @@ class ShortVideoVC extends PureComponent {
 		}, () => {
 			const { data } = this.state;
 			console.log('onLoadDataRefresh');
-			console.log(data);
 		});
 	}
 
@@ -49,7 +48,6 @@ class ShortVideoVC extends PureComponent {
 			data: newData
 		}, () => {
 			console.log('onLoadDataMore');
-			console.log(newData);
 		});
 	}
 
@@ -149,14 +147,14 @@ const styles = {
 	loading: {
 		width: SCREEN_WIDTH,
 		height: SCREEN_HEIGHT,
-		backgroundColor: 'black',
+		backgroundColor: '#666',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	loadingTxt: {
 		textAlign: 'center',
-		color: 'white',
-		fontSize: 32,
+		color: 'black',
+		fontSize: 22,
 	}
 };
 
